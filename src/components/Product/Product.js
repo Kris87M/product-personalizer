@@ -2,6 +2,7 @@ import styles from './Product.module.scss';
 import clsx from 'clsx';
 import Button from '../Button/Button';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Product = props => {
   // console.log(props.sizes)
@@ -66,6 +67,15 @@ const Product = props => {
       </div>
     </article>
   )
+};
+
+Product.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  colors: PropTypes.array.isRequired,
+  sizes: PropTypes.array.isRequired,
+  basePrice: PropTypes.number.isRequired,
 };
 
 export default Product;
