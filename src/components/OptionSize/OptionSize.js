@@ -1,5 +1,6 @@
 import styles from './OptionSize.module.scss';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 
 function OptionSize(props) {
   return (
@@ -10,6 +11,12 @@ function OptionSize(props) {
       </ul>
     </div>
   )
+}
+
+OptionSize.propTypes = {
+  sizes: PropTypes.array.isRequired,
+  currentSize: PropTypes.string.isRequired,
+  setCurrentSize: PropTypes.func.isRequired,
 }
 
 export default OptionSize;
