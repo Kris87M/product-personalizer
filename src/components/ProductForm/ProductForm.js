@@ -5,7 +5,6 @@ import OptionColor from '../OptionColor/OptionColor';
 import PropTypes from 'prop-types';
 
 function ProductForm(props) {
-  // console.log(props)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,7 +12,7 @@ function ProductForm(props) {
       Summary
       ===========
       Name: ${props.title}
-      Price: ${props.getPrice()}
+      Price: ${props.price}
       Size: ${props.currentSize}
       Color: ${props.currentColor}`)
   }
@@ -31,7 +30,7 @@ function ProductForm(props) {
 
 ProductForm.propTypes = {
   title: PropTypes.string.isRequired,
-  getPrice: PropTypes.func.isRequired,
+  price: PropTypes.number.isRequired,
   sizes: PropTypes.array.isRequired,
   colors: PropTypes.array.isRequired,
   currentColor: PropTypes.string.isRequired,
