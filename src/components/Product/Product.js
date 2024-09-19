@@ -16,11 +16,23 @@ const Product = props => {
   }
 
   const getPrice = () => {
-    const addCost = (props.sizes.find(({ name }) => name === currentSize)).additionalPrice;
+    const selectedSize = props.sizes.find((size) => size.name === currentSize);
+    const addCost = selectedSize ? selectedSize.additionalPrice : 0;
     const newPrice = props.basePrice + addCost;
     return newPrice;
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(`
+      Summary
+      ===========
+      Name: ${props.title}
+      Price: ${getPrice()}
+      Size: ${currentSize}
+      Color: ${currentColor}`)
+  }
+  
   return (
     <article className={styles.product}>
       <div className={styles.imageContainer}>
@@ -34,7 +46,7 @@ const Product = props => {
           <h2 className={styles.name}>{props.title}</h2>
           <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>
