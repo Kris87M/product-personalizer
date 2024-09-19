@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import { useState } from 'react';
 
 const Product = props => {
-  // console.log(props)
+  // console.log(props.sizes)
 
   const[currentColor, setCurrentColor] = useState(props.colors[0])
   // console.log(currentColor)
@@ -13,6 +13,12 @@ const Product = props => {
 
   const prepareColorClassName = color => {
     return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
+  }
+
+  const getPrice = () => {
+    const addCost = (props.sizes.find(({ name }) => name === currentSize)).additionalPrice;
+    const newPrice = props.basePrice + addCost;
+    return newPrice;
   }
 
   return (
@@ -26,19 +32,19 @@ const Product = props => {
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
-          <span className={styles.price}>Price: {props.basePrice}$</span>
+          <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
         <form>
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>
-              {props.sizes.map((size, index) => <li key={index}><button type="button" className={clsx(currentSize === size.name && styles.active)}>{size.name}</button></li>)}
+              {props.sizes.map((size, index) => <li key={index}><button type="button" className={clsx(currentSize === size.name && styles.active)} onClick={()=>setCurrentSize(size.name)}>{size.name}</button></li>)}
             </ul>
           </div>
           <div className={styles.colors}>
             <h3 className={styles.optionLabel}>Colors</h3>
             <ul className={styles.choices}>
-              {props.colors.map((color, index) => <li key={index}><button  type="button" className={clsx(prepareColorClassName(color), currentColor === color && styles.active)}></button></li>)}   
+              {props.colors.map((color, index) => <li key={index}><button  type="button" className={clsx(prepareColorClassName(color), currentColor === color && styles.active)} onClick={()=>setCurrentColor(color)}></button></li>)}   
             </ul>
           </div>
           <Button className={styles.button}>
