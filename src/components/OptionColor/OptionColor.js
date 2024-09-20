@@ -1,6 +1,7 @@
 import styles from './OptionColor.module.scss';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 
 function OptionColor(props) {
 
@@ -12,7 +13,7 @@ function OptionColor(props) {
     <div className={styles.colors}>
       <h3 className={styles.optionLabel}>Colors</h3>
       <ul className={styles.choices}>
-        {props.colors.map((color, index) => <li key={index}><button  type="button" className={clsx(prepareColorClassName(color), props.currentColor === color && styles.active)} onClick={()=>props.setCurrentColor(color)}></button></li>)}   
+        {props.colors.map((color) => <li key={shortid()}><button  type="button" className={clsx(prepareColorClassName(color), props.currentColor === color && styles.active)} onClick={()=>props.setCurrentColor(color)}></button></li>)}   
       </ul>
     </div>
   )
